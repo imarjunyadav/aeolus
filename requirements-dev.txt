@@ -1,0 +1,10 @@
+# All dependencies for running everything locally in one environment.
+# Individual service requirements are in requirements-cloud.txt / requirements-vessel.txt.
+fastapi>=0.111.0,<1.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0,<3.0
+numpy>=1.26.0
+aiohttp>=3.9.0
+sqlalchemy>=2.0.0
+pytest>=8.0.0
+httpx>=0.27.0   # for FastAPI TestClient
