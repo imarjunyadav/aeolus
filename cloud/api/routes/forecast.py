@@ -25,6 +25,10 @@ async def get_forecast(request: ForecastRequest) -> ForecastPackage:
     connectors are ready, this handler is replaced — the request/response
     schema stays the same.
     """
+    # request.route_area is accepted by ForecastRequest (open dict for
+    # bounding-box / corridor / future formats) but is not consumed in Phase 1.
+    # The mock generator covers a fixed ±10° area around the vessel position.
+    # Real corridor-constrained packages will be assembled in Phase 3+.
     return generate_mock_forecast_package(
         vessel_position=request.vessel_position,
         destination=request.destination,

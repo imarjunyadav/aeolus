@@ -120,6 +120,7 @@ def generate_mock_forecast_package(
     forecast_horizons_hours: list[int] | None = None,
     n_icebergs: int = 4,
     seed: int | None = None,
+    reference_time: datetime | None = None,
 ) -> ForecastPackage:
     """
     Generate a minimal but structurally complete ForecastPackage.
@@ -130,16 +131,24 @@ def generate_mock_forecast_package(
         Center of the forecast area.
     destination : Position, optional
         Not used in mock generation; accepted to match ForecastRequest signature.
+        ForecastRequest.route_area is similarly accepted by the schema but not
+        consumed here — Phase 1 generates a fixed ±10° area around the vessel.
     forecast_horizons_hours : list[int], optional
         Defaults to [6, 12, 24, 48, 72].
     n_icebergs : int
         Number of synthetic icebergs to generate (default 4).
     seed : int, optional
-        Random seed for reproducibility.
+        Controls all random values (grid, icebergs, weather, ocean).
+        package_id always uses uuid4() regardless of seed — each package
+        needs a unique ID at runtime.
+    reference_time : datetime, optional
+        Base timestamp for all valid_at and horizon fields.  When provided,
+        the package is fully deterministic given a fixed seed (useful for
+        testing and benchmarking).  Defaults to the current UTC time.
     """
     horizons = forecast_horizons_hours or DEFAULT_HORIZONS
     rng = random.Random(seed)
-    now = _now_utc()
+    now = reference_time if reference_time is not None else _now_utc()
 
     # --- Grid ---
     # Centre the grid on vessel position; extend ±10° lat, ±10° lon.

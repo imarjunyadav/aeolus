@@ -49,12 +49,15 @@ class WeatherSnapshot(BaseModel):
     """
     Area-representative atmospheric values for the forecast corridor.
 
-    These are consumed by Navigation Intelligence as-is; Aeolus does not
-    produce weather forecasts. All fields are Optional because not every
-    provider or operational mode populates every variable.
-
+    Phase 1 placeholder: a single snapshot covers the whole forecast area.
+    Future phases will supply corridor-resolved and time-horizon-resolved
+    values once provider evaluation (Phase 2) determines the best sources.
     Gridded weather arrays can be added as Optional[list[list[float]]] fields
     in a later schema version without breaking existing clients.
+
+    These are consumed inputs from external providers; Aeolus does not
+    produce weather forecasts. All fields are Optional because not every
+    provider or operational mode populates every variable.
     """
     source_data_timestamp: datetime
     source_data_age_seconds: int
@@ -74,8 +77,12 @@ class OceanSnapshot(BaseModel):
     """
     Area-representative oceanographic values for the forecast corridor.
 
-    Like WeatherSnapshot, these are consumed inputs, not Aeolus predictions.
+    Phase 1 placeholder: a single snapshot covers the whole forecast area.
+    Future phases will supply corridor-resolved and time-horizon-resolved
+    values once provider evaluation (Phase 2) determines the best sources.
     Gridded arrays can be added as Optional fields in later schema versions.
+
+    Like WeatherSnapshot, these are consumed inputs, not Aeolus predictions.
     """
     source_data_timestamp: datetime
     source_data_age_seconds: int
