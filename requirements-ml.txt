@@ -1,0 +1,3 @@
+# Optional Phase 4 ML environment for future model experiments.
+scikit-learn>=1.5
+# Deep-learning frameworks should be added only after dataset/model evaluation.

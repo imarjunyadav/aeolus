@@ -1,0 +1,18 @@
+fastapi>=0.111.0,<1.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0,<3.0
+numpy>=1.26.0
+
+# Phase 3 — data connectors
+copernicusmarine>=2.0          # CMEMS: ocean forecast + NRT sea ice
+ecmwf-opendata>=0.3            # ECMWF IFS Open Data (fully open since Oct 2025)
+herbie-data>=2024.9            # GFS via NOMADS (weather fallback, zero auth)
+xarray>=2024.3                 # Common data layer
+cfgrib>=0.9                    # GRIB2 reading for ECMWF and GFS output
+scipy>=1.13                    # Regridding (RegularGridInterpolator)
+pyproj>=3.6                    # Polar-stereographic reprojection (OSI SAF)
+netcdf4>=1.7                   # NetCDF file reading
+pandas>=2.2                    # Iceberg CSV parsing (USNIC)
+rasterio>=1.3                  # GeoTIFF reading (NSIDC G02135 concentration)
+
+pydap>=3.5  # OSI SAF OPeNDAP access
